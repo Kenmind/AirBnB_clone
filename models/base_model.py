@@ -19,22 +19,19 @@ class BaseModel:
                     @args: arguments that have no key values
                     @kwargs: arguments with key and values
         """
-        TIME = "%Y-%m-%dT%H:%M:%S.%f"
 
-        self.id = str(uuid4())
-        self.created_at = datetime.today()
-        self.updated_at = self.created_at
-
-        if len(kwargs) != 0:
-            for key, value in kwargs.items():
-                if key == "created_at" or key == "updated_at":
-                    self.__dict__[key] = datetime.strptime(value, TIME)
-                elif key == "id":
-                    self.__dict__[key] = str(value)
-                else:
-                    self.__dict__[key] = value
-            else:
-                models.storage.new(self)
+        if kwargs:
+            for name, value in kwargs.items():
+                if name != '__class__':
+                    if name == 'created_at' or name == 'updated_at':
+                        value = datetime.strptime(
+                            value, "%Y-%m-%dT%H:%M:%S.%f")
+                    setattr(self, name, value)
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
+            models.storage.new(self)
 
     def __str__(self):
         """
