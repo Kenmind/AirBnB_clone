@@ -1,63 +1,51 @@
 #!/usr/bin/python3
-"""
-Defines a class that serializes instances to a JSON file
-and deserializes JSON file to instances
-"""
-
+"""FileStorage module"""
 import json
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+
 
 class FileStorage:
-    """
-    Serializes a class instance to a JSON file and
-    deserializes a JSON file to an instance
+    """class FileStorage
 
-    Private class attributes:
-        @__file_path: string-path to the JSON file (ex: file.json)
-        @__objects: dictionary-empty but will store objects by
-        <class name>.id (ex: to store a BaseModel object with id=1212121212,
-        the key will be BaseModel.1212121212)
-    Public instance methods:
-        @all(self): returns the dictionary __objects
-        @new(self, obj): sets in __objects the obj with key
-        <obj class name>.id
-        @save(self): serializes __objects to the JSON file (path: __file_path)
-        @reload(self): deserializes the JSON file to __objects (only
-        if the JSON file (__file_path) exists; otherwise, do nothing. If
-        the file doesn't exist, no exception should be raised)
+    Attributes:
+        __filepath (str): file path to JSON file
+        __objects (dict): dictionary of objects
     """
-    __file_path = "file.json"
+    __file_path = 'file.json'
     __objects = {}
 
-    def __init__(self):
-        pass
-
     def all(self):
+        """all method returns dictionary of objects
+        Returns:
+            __objects - dictionary of objects
         """
-        Returns the dictionary of obj
-        """
-        return FileStorage.__objects
+        return self.__objects
 
     def new(self, obj):
-        """
-        Appends new object to the var '__objects'
-
+        """new method which adds object to __objects dict
         Args:
-                    @obj: object to append
+            obj (object): object to add to dictionary
         """
-        FileStorage.__objects["{}.{}".format(obj.__class__.__name__,
-                                                  obj.id)] = obj
+        if obj:
+            key = '{}.{}'.format(type(obj).__name__, obj.id)
+            self.__objects[key] = obj
 
     def save(self):
-        """
-        Serializes __objects to the JSON file at __file_path
-        """
-        obj = {
-                key: value.to_dict()
-                for key, value in FileStorage.__objects.items()
-                }
-        with open(FileStorage.__file_path, "w") as J_File:
-            json.dump(obj, J_File)
+        """save method serializes __objects to JSON file at __filepath"""
+        obj_dict = {}
+        for key, obj in self.__objects.items():
+            obj_dict[key] = obj.to_dict()
+
+        json_str = json.dumps(obj_dict)
+
+        with open(self.__file_path, 'w', encoding='utf-8') as f:
+            f.write(json_str)
 
     def reload(self):
         """reload method deserializes the JSON file to __objects"""
