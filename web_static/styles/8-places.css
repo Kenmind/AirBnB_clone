@@ -33,6 +33,11 @@
 	flex-direction: row;
 	justify-content: space-between;
 	margin-bottom: 20px;
+	text-align: center;
+}
+
+.places .name_and_price h2 {
+	padding-left: 30%;
 }
 
 /* Price by night circle */
