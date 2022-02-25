@@ -1,7 +1,7 @@
 .places h1 {
-	text-align: center;
+	text-align: left;
 	font-size: 30px;
-	justify-content: center;
+	align-self: flex-start;
 	width: 100%;
 }
 
@@ -26,7 +26,7 @@
 	font-size: 30px;
 	text-align: center;
 	align-self: center;
-	align-items: center;
+	align-items: flex-start;
 }
 
 /* Name and price header */
@@ -224,3 +224,99 @@ article .amenities ul li span {
 	}
 }
 
+@media only screen and (max-width: 765px) {
+    .places > article {
+        width: 50%;
+        padding: 20px 20px 20px 20px;
+        margin: 20px 20px 20px 20px;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+    .places {
+        width: 100%;
+        border: 0;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 50px;
+    }
+    .price_by_night {
+        color: #FF5A5F;
+        border: 2px solid #FF5A5F;
+        min-width: auto;
+        height: 4%;
+        font-size: 100%;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        margin-top: 2%;
+        position: absolute;
+        top: 1%;
+        right: 5%;
+    }
+    .places > article > h2 {
+        font-size: 130%;
+        align-self: center;
+    }
+    .information {
+
+        margin-top: 5%;
+        align-self: center;
+        height: 80%;
+        width: 100%;
+        border-bottom: 1px solid #DDDDDD;
+        border-top: 1px solid #DDDDDD;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .img_room {
+        background-size: 70%;
+    }
+    .image_guest {
+        background-size: 70%;
+    }
+    .img_bathrooms {
+        background-size: 70%;
+    }
+    .max_guest , .number_rooms, .number_bathrooms {
+        margin: auto 20px auto 10px;
+        text-align: center;
+        position: relative;
+        font-size: 100%;
+    }
+}
+
+@media only screen and (max-width: 505px) {
+    .places > article > h2 {
+        font-size: 130%;
+        align-self: center;
+    }
+    .price_by_night {
+        color: #FF5A5F;
+        border: 2px solid #FF5A5F;
+        min-width: auto;
+        height: 2%;
+        font-size: 80%;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        margin-top: 4%;
+        position: absolute;
+        top: 1%;
+        right: 6%;
+    }
+    .information {
+        margin-top: 5%;
+    }
+}
